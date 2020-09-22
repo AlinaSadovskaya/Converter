@@ -12,7 +12,17 @@ def getArray() {
         ReceivedString = ReceivedString.substring(currentDotPosition+1, ReceivedString.length())
         currentDotPosition = ReceivedString.indexOf('.')
         VersionName.add(ReceivedString.substring(0,currentDotPosition))
-        VersionName.add(ReceivedString.substring(currentDotPosition+1, ReceivedString.length()-1))
+        String version = ReceivedString.substring(currentDotPosition+1, ReceivedString.length()-1)
+        def currentVerPosition = version.indexOf('-')
+        String finalVersion = version.substring(1, currentVerPosition)
+        if(finalVersion.length() == 0)
+        {
+            VersionName.add('0')
+        }
+        else
+        {
+            VersionName.add(finalVersion)
+        }
         return VersionName
     } else {
         return ["0","0","0"]

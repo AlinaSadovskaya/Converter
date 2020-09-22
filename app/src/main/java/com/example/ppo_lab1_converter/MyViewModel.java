@@ -10,8 +10,10 @@ import androidx.annotation.RequiresApi;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-
+import com.example.ppo_lab1_converter.Converter;
 import java.util.Objects;
+
+import static com.example.ppo_lab1_converter.Converter.Convert;
 
 public class MyViewModel extends AndroidViewModel {
     private final MutableLiveData<String> ValueFrom = new MutableLiveData<>("");
@@ -33,7 +35,7 @@ public class MyViewModel extends AndroidViewModel {
     public void changeData(Float percent) {
         this.percent = percent;
         if (Objects.requireNonNull(ValueFrom.getValue()).length() != 0)
-            convertField();
+            ValueTo.postValue(Converter.Convert(Float.parseFloat(Objects.requireNonNull(ValueFrom.getValue())),  percent));
     }
 
     public void clearField() {
@@ -48,25 +50,21 @@ public class MyViewModel extends AndroidViewModel {
         else
         {
             ValueFrom.setValue(ValueFrom.getValue().substring(0, ValueFrom.getValue().length() - 1));
-            convertField();
+            ValueTo.postValue(Converter.Convert(Float.parseFloat(Objects.requireNonNull(ValueFrom.getValue())), (float) percent));
         }
     }
 
     public void addNumb(String numb) {
         ValueFrom.setValue(ValueFrom.getValue() + numb);
-        convertField();
+        ValueTo.postValue(Converter.Convert(Float.parseFloat(Objects.requireNonNull(ValueFrom.getValue())), (float) percent));
     }
 
     public void addDot() {
         if (!Objects.requireNonNull(ValueFrom.getValue()).contains("."))
         {
             ValueFrom.setValue(ValueFrom.getValue() + ".");
-            convertField();
+            ValueTo.postValue(Converter.Convert(Float.parseFloat(Objects.requireNonNull(ValueFrom.getValue())), (float) percent));
         }
-    }
-
-    public void convertField() {
-        ValueTo.postValue(Float.toString((float) (Float.parseFloat(Objects.requireNonNull(ValueFrom.getValue())) * percent)));
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -74,7 +72,7 @@ public class MyViewModel extends AndroidViewModel {
         if (!Objects.equals(ValueTo.getValue(), ""))
         {
             ValueFrom.setValue(ValueTo.getValue());
-            convertField();
+            ValueTo.postValue(Converter.Convert(Float.parseFloat(Objects.requireNonNull(ValueFrom.getValue())), (float) percent));
         }
 
     }

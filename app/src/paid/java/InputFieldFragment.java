@@ -97,8 +97,8 @@ public class InputFieldFragment extends Fragment  implements AdapterView.OnItemS
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
-
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
