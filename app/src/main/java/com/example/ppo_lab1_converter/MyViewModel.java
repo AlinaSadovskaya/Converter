@@ -35,7 +35,7 @@ public class MyViewModel extends AndroidViewModel {
     public void changeData(Float percent) {
         this.percent = percent;
         if (Objects.requireNonNull(ValueFrom.getValue()).length() != 0)
-            ValueTo.postValue(Converter.Convert(Float.parseFloat(Objects.requireNonNull(ValueFrom.getValue())),  percent));
+            ValueTo.postValue(Converter.Convert(Float.parseFloat(Objects.requireNonNull(ValueFrom.getValue())), (float) percent));
     }
 
     public void clearField() {
