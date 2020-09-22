@@ -19,7 +19,7 @@ def getArray() {
         }
         else{
             currentDotPosition = version.indexOf('-')
-            if (currentVerPosition > 0) {
+            if (currentDotPosition > 0) {
                 def currentVerPosition = version.substring(currentDotPosition + 1, version.length()-1).indexOf('-')
                 VersionName.add(version.substring(currentDotPosition + 1, currentVerPosition))
             }
